@@ -1,0 +1,21 @@
+<!-- student_management/templates/student_management/register_program.html -->
+{% extends "dashboard/dashboard.html" %}
+
+{% block content %}
+    <h2>Register Program</h2>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}  <!-- Include CSRF token for security -->
+        <label for="program_name">Program Name:</label>
+        <input type="text" name="program_name" id="program_name" required />
+        <button type="submit">Register</button>
+    </form>
+{% endblock %}

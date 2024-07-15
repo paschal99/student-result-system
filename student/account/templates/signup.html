@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Bootstrap CSS -->
+    <style>
+        /* Custom styling for the registration page */
+        .registration-container {
+            background-color: #f9f9f9; /* Light background color */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            padding: 20px; /* Internal padding */
+            margin-top: 50px; /* Top margin */
+        }
+
+        .registration-container .image-section {
+            text-align: center; /* Center the image */
+            padding: 20px; /* Padding around the image */
+        }
+
+        .registration-container .image-section img {
+            max-width: 100%; /* Make sure the image fits the column */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 10px; /* Rounded corners for the image */
+        }
+
+        .form-group {
+            margin-bottom: 15px; /* Space between form groups */
+        }
+
+        .btn-primary {
+            width: 100%; /* Full-width button */
+            border-radius: 25px; /* Rounded button corners */
+        }
+
+        .alert {
+            margin-top: 10px; /* Space above alert */
+        }
+    </style>
+</head>
+<body style="background-color: #1c606a">
+    <div class="container"> <!-- Bootstrap container for grid layout -->
+        <div class="row justify-content-center"> <!-- Center the row -->
+            <!-- Left-side column for the school image -->
+            <div class="col-md-4"> <!-- 4-column wide section for the image -->
+                <div class="image-section"> <!-- Section for the image -->
+                    <img src="school_image.jpg" alt="School Image"> <!-- Replace with your school image -->
+                </div>
+            </div>
+
+            <!-- Right-side column for the registration form -->
+            <div class="col-md-6"> <!-- 6-column wide section for the form -->
+                <div class="registration-container"> <!-- Container for the form -->
+                    <h2 class="text-center">Register a New Account</h2> <!-- Centered heading -->
+
+                    {% if messages %}
+                        <div class="alert alert-info"> <!-- Alert box for messages -->
+                            <!-- Display any error or success messages -->
+                            {% for message in messages %}
+                                <p>{{ message }}</p> <!-- Message content -->
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <form method="post" class="needs-validation" novalidate> <!-- Client-side validation -->
+                        {% csrf_token %} <!-- CSRF token for security -->
+
+                        <!-- Username -->
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" id="username" name="username" class="form-control" required placeholder="Choose a username">
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" class="form-control" required placeholder="Enter your email address">
+                        </div>
+
+                        <!-- First Name -->
+                        <div class="form-group">
+                            <label for="first_name">First Name:</label>
+                            <input type="text" id="first_name" name="first_name" class="form-control" placeholder="Enter your first name">
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="form-group">
+                            <label for="last_name">Last Name:</label>
+                            <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Enter your last name">
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="password" class="form-control" required placeholder="Choose a password">
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="form-group">
+                            <label for="confirm_password">Confirm Password:</label>
+                            <input type="password" id="confirm_password" name="confirm_password" required class="form-control" placeholder="Confirm your password">
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Register</button> <!-- Full-width submit button -->
+                        </div>
+                    </form>
+
+                    <div class="text-center mt-3"> <!-- Additional text at the bottom -->
+                        <p>Already have an account? <a href="{% url 'login' %}">Log in here</a>.</p>
+                    </div>
+                </div> <!-- End of registration container -->
+            </div> <!-- End of form column -->
+        </div> <!-- End of row -->
+    </div> <!-- End of container -->
+
+    <!-- Bootstrap and jQuery for interactivity -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

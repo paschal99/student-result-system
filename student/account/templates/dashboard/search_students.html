@@ -1,0 +1,85 @@
+{% extends 'dashboard/dashboard.html' %}  <!-- Extend from base template -->
+
+{% block content %}  <!-- Start of the unique content block -->
+    <div class="container mt-5">  <!-- Bootstrap container with top margin -->
+        <h2>Search Students</h2>
+
+        <!-- Search form -->
+        <form method="GET" class="form-inline mb-3">  <!-- Inline form with Bootstrap -->
+            <!-- Search by name -->
+            <input type="text" name="query" placeholder="Search by name" class="form-control mr-2"
+                value="{{ query }}">
+
+            <!-- Filter by program -->
+            <select name="program" class="form-control mr-2">
+                <option value="">Select Program</option>  <!-- Default option -->
+                {% for program in programs %}
+                    <option value="{{ program.id }}" {% if selected_program == program.id %}selected{% endif %}>
+                        {{ program.name }}
+                    </option>
+                {% endfor %}
+            </select>
+
+
+            <!-- Filter by sex -->
+            <select name="sex" class="form-control mr-2">
+                <option value="">Select Sex</option>  <!-- Default option -->
+                <option value="male" {% if selected_sex == 'male' %}selected{% endif %}>Male</option>
+                <option value="female" {% if selected_sex == 'female' %}selected{% endif %}>Female</option>
+            </select>
+
+            <!-- Search button -->
+            <button type="submit" class="btn btn-primary">Search</button>  <!-- Bootstrap primary button -->
+        </form>
+
+        <!-- Display the search results in a table -->
+        <table class="table table-striped table-bordered">  <!-- Bootstrap table -->
+            <thead>
+                <tr>
+                    <th>#</th>  <!-- Serial number -->
+                    <th>First Name</th>  <!-- Student's first name -->
+                    <th>Last Name</th>  <!-- Student's last name -->
+                    <th>Sex</th>  <!-- Student's sex -->
+                    <th>Program</th>  <!-- Student's program -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in page %}  <!-- Loop through paginated data -->
+                    <tr>
+                        <td>{{ forloop.counter }}</td>  <!-- Serial number -->
+                        <td>{{ student.first_name }}</td>  <!-- First name -->
+                        <td>{{ student.last_name }}</td>  <!-- Last name -->
+                        <td>{{ student.sex }}</td>  <!-- Sex -->
+                        <td>{{ student.program.name }}</td>  <!-- Program -->
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5">No students found.</td>  <!-- If no results -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Pagination controls -->
+        <nav>
+            <ul class="pagination">  <!-- Bootstrap pagination -->
+                {% if page.has_previous %}  <!-- Previous page link -->
+                    <li class="page-item"><a class="page-link" href="?page={{ page.previous_page_number }}&query={{ query }}&program={{ selected_program }}&sex={{ selected_sex }}">Previous</a></li>
+                {% endif %}
+
+                {% for num in page.paginator.page_range %}  <!-- Page numbers -->
+                    <li class="page-item {% if page.number == num %}active{% endif %}">
+                        <a class="page-link" href="?page={{ num }}&query={{ query }}&program={{ selected_program }}&sex={{ selected_sex }}">{{ num }}</a>
+                    </li>
+                {% endfor %}
+
+                {% if page.has_next %}  <!-- Next page link -->
+                    <li class="page-item"><a class="page-link" href="?page={{ page.next_page_number }}&query={{ query }}&program={{ selected_program }}&sex={{ selected_sex }}">Next</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <!-- Navigation link to dashboard -->
+        <p><a href="{% url 'dashboard' %}" class="btn btn-link">Back to Dashboard</a>  <!-- Link to dashboard -->
+    </div>
+{% endblock %}  <!-- End of the unique content block -->

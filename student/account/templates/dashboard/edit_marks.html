@@ -1,0 +1,35 @@
+{% extends 'dashboard/dashboard.html' %}  <!-- Extend from the base template -->
+
+{% block content %}  <!-- Start of the content block -->
+    <div class="container mt-5">  <!-- Bootstrap container with top margin -->
+        <div class="card">  <!-- Bootstrap card component -->
+            <div class="card-header bg-gradient-info text-white">  <!-- Card header with custom styles -->
+                Edit Marks
+            </div>
+            <div class="card-body">
+                <!-- Display success or error messages -->
+                {% if messages %}
+                    <div class="alert alert-info">  <!-- Info alert for messages -->
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <!-- Form for editing marks -->
+                <form method="post">
+                    {% csrf_token %}  <!-- CSRF protection -->
+
+                    <!-- Render the form fields directly -->
+                    {{ form.as_p }}  <!-- Render form fields with applied Bootstrap classes -->
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary">Save Changes</button>  <!-- Bootstrap primary button -->
+                </form>
+            </div>
+            <div class="card-footer">  <!-- Card footer for additional actions -->
+                <a href="{% url 'view_marks' %}" class="btn btn-link">Back to All Marks</a>  <!-- Link to view all marks -->
+            </div>
+        </div>
+    </div>
+{% endblock %}  <!-- End of the content block -->

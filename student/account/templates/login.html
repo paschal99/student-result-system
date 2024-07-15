@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Bootstrap CSS -->
+    <style>
+        /* Custom CSS for the login page */
+        .login-container {
+            max-width: 400px; /* Limiting the width of the login form */
+            margin: auto; /* Centering the container */
+            margin-top: 100px; /* Adding some space from the top */
+        }
+
+        .login-card {
+            border-radius: 10px; /* Rounded corners for the card */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+
+        .login-card .card-header {
+            text-align: center; /* Centering the title */
+            font-weight: bold; /* Bold font for emphasis */
+        }
+
+        .login-card .form-group {
+            margin-bottom: 20px; /* Increasing spacing between form elements */
+        }
+
+        .login-card .btn-primary {
+            width: 100%; /* Button stretches to the full width */
+            border-radius: 25px; /* Rounded button corners */
+        }
+
+        .login-card .card-footer {
+            text-align: center; /* Centering the footer text */
+        }
+
+        /* Styles for alert messages */
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body style="background-color: #1c606a">
+    <div class="login-container"> <!-- Updated container class -->
+        <div class="card login-card"> <!-- New card class -->
+            <div class="card-header bg-primary text-white"> <!-- Customized card header -->
+                Login to Your Account
+            </div>
+            <div class="card-body"> <!-- Card body with form -->
+                <!-- Display error/success messages -->
+                {% if messages %}
+                    <div class="alert alert-info"> <!-- Alert with some margin -->
+                        {% for message in messages %}
+                            <p>{{ message }}</p> <!-- Message paragraph -->
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <!-- Login form -->
+                <form method="post" class="needs-validation" novalidate> <!-- Client-side validation -->
+                    {% csrf_token %} <!-- CSRF protection token -->
+
+                    <!-- Username field -->
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Enter your username" required>
+                    </div>
+
+                    <!-- Password field -->
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+                    </div>
+
+                    <!-- Submit button -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Login</button> <!-- Styled submit button -->
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer"> <!-- Customized card footer -->
+                <p>Don't have an account? <a href="{% url 'registration' %}">Register here</a>.</p> <!-- Registration link -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap and jQuery for interactivity -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

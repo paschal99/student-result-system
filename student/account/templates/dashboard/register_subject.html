@@ -1,0 +1,53 @@
+{% extends 'dashboard/dashboard.html' %}  <!-- Extend from base template -->
+
+{% block content %}  <!-- Start of unique content -->
+    <div class="container mt-5">  <!-- Bootstrap container with top margin -->
+        <div class="card">  <!-- Bootstrap card component -->
+            <div class="card-header bg-primary text-white">  <!-- Card header with custom styles -->
+                Register a New Subject
+            </div>
+
+            <div class="card-body">
+                <!-- Display error and success messages -->
+                {% if messages %}
+                    <div class="alert alert-info">  <!-- Bootstrap info alert -->
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <!-- Form for registering a subject -->
+                <form method="post" class="needs-validation" novalidate>  <!-- Form with client-side validation -->
+                    {% csrf_token %}  <!-- CSRF protection -->
+
+                    <!-- Subject Name -->
+                    <div class="form-group">  <!-- Bootstrap form group -->
+                        <label for="name">Subject Name:</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Subject Name" required>
+                    </div>
+
+                    <!-- Subject Code -->
+                    <div class="form-group">
+                        <label for="subject_code">Subject Code:</label>
+                        <input type="text" id="subject_code" name="subject_code" class="form-control" placeholder="Enter Subject Code" required>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-group">  <!-- Bootstrap form group for spacing -->
+                        <button type="submit" class="btn btn-primary">Register Subject</button>  <!-- Primary Bootstrap button -->
+                    </div>
+                </form>
+            </div>
+
+            <div class="card-footer">  <!-- Card footer for additional links or info -->
+                <!-- Link to return to the dashboard -->
+                <a href="{% url 'dashboard' %}" class="btn btn-link">Back to Dashboard</a>  <!-- Link to dashboard -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap and jQuery for interactivity -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+{% endblock %}  <!-- End of unique content -->

@@ -1,0 +1,70 @@
+{% extends 'dashboard/dashboard.html' %}
+
+{% block content %}  <!-- Start of unique content -->
+    <div class="container mt-5">  <!-- Bootstrap container with top margin -->
+        <div class="card">  <!-- Bootstrap card for form -->
+            <div class="card-header bg-primary text-white">  <!-- Card header with custom styles -->
+                Register a New Student
+            </div>
+
+            <div class="card-body">
+                <!-- Display success or error messages -->
+                {% if messages %}
+                    <div class="alert alert-info">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <!-- Form for registering a student -->
+                <form method="post">
+                    {% csrf_token %}  <!-- CSRF protection -->
+
+                    <!-- First Name -->
+                    <div class="form-group">
+                        <label for="first_name">First Name:</label>
+                        <input type="text" id="first_name" name="first_name" class="form-control" placeholder="Enter first name" required>
+                    </div>
+
+                    <!-- Last Name -->
+                    <div class="form-group">
+                        <label for="last_name">Last Name:</label>
+                        <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Enter last name" required>
+                    </div>
+
+                    <!-- Sex -->
+                    <div class="form-group">
+                        <label for="sex">Sex:</label>
+                        <select id="sex" name="sex" class="form-control" required>
+                            <option value="">Select Sex</option>  <!-- Default option -->
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+
+                    <!-- Program (dropdown) -->
+                    <div class="form-group">
+                        <label for="program">Program:</label>
+                        <select id="program" name="program" class="form-control" required>
+                            <option value="">Select Program</option>  <!-- Default option to avoid empty string -->
+                            {% for program in programs %}
+                                <option value="{{ program.id }}">{{ program.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Register</button>  <!-- Bootstrap primary button -->
+                    </div>
+                </form>
+            </div>
+
+            <div class="card-footer">  <!-- Footer for additional links or info -->
+                <!-- Navigation link to other sections -->
+                <a href="{% url 'dashboard' %}" class="btn btn-link">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}  <!-- End of unique content -->

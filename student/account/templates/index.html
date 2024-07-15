@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Record Management System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Bootstrap CSS -->
+    <style>
+        /* Custom styles for the index page */
+        .hero {
+            background-image: url('{% static "img/shubham-sharan-Z-fq3wBVfMU-unsplash.jpg" %}'); /* Background image */
+            background-size: cover; /* Ensure the image covers the section */
+            background-position: center; /* Center the background image */
+            height: 90vh; /* Set the height of the hero section */
+            color: white; /* White text for visibility */
+            text-align: center; /* Center the text */
+            display: flex; /* Flexbox for centering content */
+            justify-content: center; /* Horizontally center content */
+            align-items: center; /* Vertically center content */
+            padding: 50px; /* Padding for spacing */
+        }
+
+        .hero h1 {
+            font-size: 3em; /* Large font for the title */
+            font-weight: bold; /* Bold title */
+        }
+
+        .hero p {
+            font-size: 1.5em; /* Smaller font for the subtitle */
+        }
+
+        .hero .btn {
+            margin: 10px; /* Space between buttons */
+            font-size: 1.2em; /* Larger font for the buttons */
+        }
+
+        .footer {
+            text-align: center; /* Center-align the footer */
+            padding: 20px; /* Padding for the footer */
+            background-color: #f1f1f1; /* Light background color */
+        }
+    </style>
+</head>
+<body>
+    {% load static %} <!-- Load static files -->
+
+    <!-- Navigation bar with links -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Student Record Management</a>
+        <div class="ml-auto"> <!-- Right-align the links -->
+            <a href="{% url 'login' %}" class="btn btn-outline-primary">Login</a> <!-- Login link -->
+            <a href="{% url 'registration' %}" class="btn btn-primary">Sign Up</a> <!-- Signup link -->
+        </div>
+    </nav>
+
+    <!-- Hero section with a background image -->
+    <div class="hero">
+        <div> <!-- Wrapper for text content -->
+            <h1>Welcome to the Student Record Management System</h1> <!-- Main heading -->
+            <p>Manage student records with ease and efficiency.</p> <!-- Subtitle -->
+            <a href="{% url 'registration' %}" class="btn btn-primary">Sign Up</a> <!-- Sign up action -->
+            <a href="{% url 'login' %}" class="btn btn-outline-light">Login</a> <!-- Login action -->
+        </div>
+    </div>
+
+    <!-- Footer with additional information -->
+    <div class="footer">
+        <p>&copy; 2024 Student Record Management System. All rights reserved.</p>
+    </div>
+
+    <!-- Bootstrap and jQuery for interactivity -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

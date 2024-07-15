@@ -1,0 +1,37 @@
+<!-- student_management/templates/student_management/list_programs.html -->
+{% extends "dashboard/dashboard.html" %}
+
+{% block content %}
+    <h2>All Programs</h2>
+
+    <table>
+        <thead>
+            <tr>
+<!--
+                 <th>Program code</th>
+                 <th>hi</th>  &lt;!&ndash; Column for index/serial number &ndash;&gt;-->
+                <th>Program number</th>
+                <th>Program code</th>
+                <th>Program Name</th>
+                <!-- Column for program name -->
+            </tr>
+        </thead>
+        <tbody>
+            {% if subjects %}
+                {% for program in subjects %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <!-- Display serial number (1-based index) -->
+                        <td>{{ program.subject_code }}</td><!-- Display program name -->
+
+                        <td>{{ program.name }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="2">No programs found.</td>  <!-- If no programs, show this message -->
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

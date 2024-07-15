@@ -1,0 +1,68 @@
+{% extends 'dashboard/dashboard.html' %}
+
+{% block content %}  <!-- Start of the unique content block -->
+    <div class="container mt-5">  <!-- Bootstrap container with top margin -->
+        <h2>All Marks</h2>
+
+        <!-- Display the marks in a Bootstrap table -->
+        <table class="table table-striped table-bordered">  <!-- Table with stripes and borders -->
+            <thead class="thead-dark">  <!-- Dark table header -->
+                <tr>
+                    <th>#</th>  <!-- Serial number -->
+                    <th>Student</th>  <!-- Student's name -->
+                    <th>Subject</th>  <!-- Subject's name -->
+                    <th>Marks</th>  <!-- Marks scored -->
+                    <th>Grade</th>  <!-- Grade assigned -->
+                    <th>Actions</th>  <!-- New column for actions (Edit) -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iterate over the paginated data -->
+                {% for mark in page.object_list %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>  <!-- Serial number in the loop -->
+                        <td>{{ mark.student.first_name }} {{ mark.student.last_name }}</td>  <!-- Student's full name -->
+                        <td>{{ mark.subject.name }}</td>  <!-- Subject's name -->
+                        <td>{{ mark.marks }}</td>  <!-- Marks scored -->
+                        <td>{{ mark.grade.name }}</td>  <!-- Grade assigned -->
+                        <!-- Edit link directing to edit view -->
+                        <td>
+                            <a href="{% url 'edit_marks' mark.id %}" class="btn btn-warning">Edit</a>  <!-- Edit link -->
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6">No marks found.</td>  <!-- If no results -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Pagination controls -->
+        <nav>
+            <ul class="pagination">  <!-- Bootstrap pagination -->
+                {% if page.has_previous %}  <!-- Previous page link -->
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page.previous_page_number }}">Previous</a>
+                    </li>
+                {% endif %}
+
+                <!-- Page number links -->
+                {% for num in page.paginator.page_range %}
+                    <li class="page-item {% if page.number == num %}active{% endif %}">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endfor %}
+
+                {% if page.has_next %}  <!-- Next page link -->
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page.next_page_number }}">Next</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <!-- Navigation link to other sections -->
+        <p><a href="{% url 'dashboard' %}" class="btn btn-link">Back to Dashboard</a></p>  <!-- Link to dashboard -->
+    </div>
+{% endblock %}  <!-- End of the unique content block -->
